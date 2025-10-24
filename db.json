@@ -1,0 +1,459 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Sarah Nguyen",
+      "role": "coach",
+      "email": "sarah.nguyen@falcons.edu",
+      "username": "sarah",
+      "avatar": "https://i.pravatar.cc/150?img=32",
+      "coachId": 1
+    },
+    {
+      "id": 2,
+      "name": "Marcus Lee",
+      "role": "coach",
+      "email": "marcus.lee@falcons.edu",
+      "username": "marcus",
+      "avatar": "https://i.pravatar.cc/150?img=12",
+      "coachId": 2
+    },
+    {
+      "id": 3,
+      "name": "Alice Carter",
+      "role": "athlete",
+      "email": "alice.carter@falcons.edu",
+      "username": "alice",
+      "avatar": "https://i.pravatar.cc/150?img=5",
+      "athleteId": 1
+    },
+    {
+      "id": 4,
+      "name": "Bob Daniels",
+      "role": "athlete",
+      "email": "bob.daniels@falcons.edu",
+      "username": "bob",
+      "avatar": "https://i.pravatar.cc/150?img=20",
+      "athleteId": 2
+    },
+    {
+      "id": 5,
+      "name": "Chloe Smith",
+      "role": "athlete",
+      "email": "chloe.smith@falcons.edu",
+      "username": "chloe",
+      "avatar": "https://i.pravatar.cc/150?img=45",
+      "athleteId": 3
+    }
+  ],
+
+  "coaches": [
+    {
+      "id": 1,
+      "name": "Sarah Nguyen",
+      "email": "sarah.nguyen@falcons.edu",
+      "specialty": "Speed & Sprints",
+      "bio": "Former national-level sprinter now focusing on data-driven speed development.",
+      "teamIds": [1]
+    },
+    {
+      "id": 2,
+      "name": "Marcus Lee",
+      "email": "marcus.lee@falcons.edu",
+      "specialty": "Strength & Conditioning",
+      "bio": "S&C coach with emphasis on force-velocity profiling and injury resilience.",
+      "teamIds": [2]
+    }
+  ],
+
+  "teams": [
+    {
+      "id": 1,
+      "name": "Falcons Track Team",
+      "sport": "Track & Field",
+      "level": "College",
+      "coachId": 1,
+      "season": "2025-2026",
+      "primaryColor": "#0F766E",
+      "secondaryColor": "#0891B2"
+    },
+    {
+      "id": 2,
+      "name": "Falcons Strength Group",
+      "sport": "Strength & Conditioning",
+      "level": "College",
+      "coachId": 2,
+      "season": "2025-2026",
+      "primaryColor": "#1D4ED8",
+      "secondaryColor": "#60A5FA"
+    }
+  ],
+
+  "athletes": [
+    {
+      "id": 1,
+      "name": "Alice Carter",
+      "email": "alice.carter@falcons.edu",
+      "teamId": 1,
+      "position": "Sprinter (100m/200m)",
+      "dob": "2004-03-18",
+      "height_cm": 168,
+      "weight_kg": 58.2,
+      "dominantSide": "right",
+      "resting_hr_bpm": 54,
+      "vo2max_ml_kg_min": 52.1,
+      "status": "active",
+      "profilePhoto": "https://images.unsplash.com/photo-1551829142-0b09f1a2f42d"
+    },
+    {
+      "id": 2,
+      "name": "Bob Daniels",
+      "email": "bob.daniels@falcons.edu",
+      "teamId": 1,
+      "position": "Middle-distance (400m/800m)",
+      "dob": "2003-11-06",
+      "height_cm": 180,
+      "weight_kg": 70.5,
+      "dominantSide": "left",
+      "resting_hr_bpm": 50,
+      "vo2max_ml_kg_min": 59.8,
+      "status": "active",
+      "profilePhoto": "https://images.unsplash.com/photo-1554306274-f251d2a5c3f0"
+    },
+    {
+      "id": 3,
+      "name": "Chloe Smith",
+      "email": "chloe.smith@falcons.edu",
+      "teamId": 1,
+      "position": "Hurdles (100mH)",
+      "dob": "2004-07-22",
+      "height_cm": 172,
+      "weight_kg": 61.0,
+      "dominantSide": "right",
+      "resting_hr_bpm": 56,
+      "vo2max_ml_kg_min": 50.6,
+      "status": "active",
+      "profilePhoto": "https://images.unsplash.com/photo-1543975200-8e313fb04b8b"
+    }
+  ],
+
+  "exercises": [
+    {
+      "id": 1,
+      "name": "Back Squat",
+      "category": "Strength",
+      "muscles": ["Quads", "Glutes", "Core"],
+      "equipment": ["Barbell", "Rack"],
+      "videoUrl": "https://www.youtube.com/watch?v=SW_C1A-rejs",
+      "cues": ["Neutral spine", "Knees track over toes", "Full foot pressure"]
+    },
+    {
+      "id": 2,
+      "name": "Conventional Deadlift",
+      "category": "Strength",
+      "muscles": ["Hamstrings", "Glutes", "Back"],
+      "equipment": ["Barbell", "Plates"],
+      "videoUrl": "https://www.youtube.com/watch?v=op9kVnSso6Q",
+      "cues": ["Bar close to shins", "Brace core", "Drive through floor"]
+    },
+    {
+      "id": 3,
+      "name": "Bench Press",
+      "category": "Strength",
+      "muscles": ["Chest", "Triceps", "Shoulders"],
+      "equipment": ["Barbell", "Bench"],
+      "videoUrl": "https://www.youtube.com/watch?v=gRVjAtPip0Y",
+      "cues": ["Shoulders back", "Controlled eccentric", "Drive bar vertically"]
+    },
+    {
+      "id": 4,
+      "name": "100m Sprint",
+      "category": "Speed",
+      "muscles": ["Full body"],
+      "equipment": ["Track", "Spikes"],
+      "videoUrl": "https://www.youtube.com/watch?v=ZZAl-_7kX8E",
+      "cues": ["Aggressive drive phase", "Relax shoulders", "Fast ground contacts"]
+    },
+    {
+      "id": 5,
+      "name": "A-Skip",
+      "category": "Drill",
+      "muscles": ["Hips", "Calves"],
+      "equipment": ["Track"],
+      "videoUrl": "https://www.youtube.com/watch?v=lFZK1bYk8iU",
+      "cues": ["Upright torso", "Ball of foot", "Rhythm"]
+    },
+    {
+      "id": 6,
+      "name": "Box Jump",
+      "category": "Plyometric",
+      "muscles": ["Quads", "Glutes", "Calves"],
+      "equipment": ["Plyo Box"],
+      "videoUrl": "https://www.youtube.com/watch?v=52rU9ZsSVxA",
+      "cues": ["Explode up", "Soft landing", "Absorb force"]
+    },
+    {
+      "id": 7,
+      "name": "90/90 Hip Flow",
+      "category": "Mobility",
+      "muscles": ["Hips"],
+      "equipment": ["Mat"],
+      "videoUrl": "https://www.youtube.com/watch?v=Khf5lri5i6k",
+      "cues": ["Controlled range", "Breathe", "No pain"]
+    }
+  ],
+
+  "workouts": [
+    {
+      "id": 1,
+      "name": "Speed Session A",
+      "focus": "Speed",
+      "level": "Intermediate",
+      "duration_min": 60,
+      "notes": "Emphasis on acceleration and max velocity",
+      "exercises": [
+        { "exerciseId": 5, "sets": 2, "reps": 30, "unit": "m", "rest_sec": 60 },
+        { "exerciseId": 4, "sets": 4, "reps": 1, "unit": "100m", "rest_sec": 180, "intensity": "95%" },
+        { "exerciseId": 6, "sets": 3, "reps": 5, "rest_sec": 90 }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Lower Body Strength",
+      "focus": "Strength",
+      "level": "Intermediate",
+      "duration_min": 75,
+      "notes": "Primary lifts + power accessory",
+      "exercises": [
+        { "exerciseId": 1, "sets": 5, "reps": 3, "intensity": "80% 1RM", "rest_sec": 150 },
+        { "exerciseId": 2, "sets": 3, "reps": 5, "intensity": "75% 1RM", "rest_sec": 150 },
+        { "exerciseId": 6, "sets": 4, "reps": 3, "rest_sec": 90 }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Recovery Mobility",
+      "focus": "Recovery",
+      "level": "All",
+      "duration_min": 30,
+      "notes": "Restore range & reduce soreness",
+      "exercises": [
+        { "exerciseId": 7, "sets": 3, "reps": 8, "side": "each", "rest_sec": 30 }
+      ]
+    }
+  ],
+
+  "sessions": [
+    {
+      "id": 1,
+      "date": "2025-10-24T16:30:00Z",
+      "teamId": 1,
+      "coachId": 1,
+      "workoutId": 1,
+      "location": "Track A",
+      "status": "completed",
+      "athleteIds": [1, 2, 3],
+      "weather": { "temp_c": 18, "wind_m_s": 2.3, "conditions": "Overcast" },
+      "summary": {
+        "avg_rpe": 6.0,
+        "best_100m_s": 11.98,
+        "max_speed_m_s": 10.2
+      }
+    },
+    {
+      "id": 2,
+      "date": "2025-10-26T10:00:00Z",
+      "teamId": 1,
+      "coachId": 2,
+      "workoutId": 2,
+      "location": "Performance Gym",
+      "status": "scheduled",
+      "athleteIds": [1, 2, 3]
+    },
+    {
+      "id": 3,
+      "date": "2025-10-27T15:00:00Z",
+      "teamId": 1,
+      "coachId": 1,
+      "workoutId": 3,
+      "location": "Recovery Room",
+      "status": "planned",
+      "athleteIds": [1, 2, 3]
+    }
+  ],
+
+  "metrics": [
+    { "id": 1, "key": "bodyweight_kg", "name": "Bodyweight", "unit": "kg", "description": "Morning bodyweight" },
+    { "id": 2, "key": "rpe", "name": "Session RPE", "unit": "1-10", "description": "Session rating of perceived exertion" },
+    { "id": 3, "key": "hr_bpm", "name": "Heart Rate", "unit": "bpm", "description": "Heart rate samples" },
+    { "id": 4, "key": "max_speed_ms", "name": "Max Speed", "unit": "m/s", "description": "Maximum running speed" },
+    { "id": 5, "key": "time_100m_s", "name": "100m Time", "unit": "s", "description": "100 meter sprint time" },
+    { "id": 6, "key": "jump_height_cm", "name": "Jump Height", "unit": "cm", "description": "Countermovement jump height" },
+    { "id": 7, "key": "training_load_kg", "name": "Training Load", "unit": "kg", "description": "Estimated strength training load" }
+  ],
+
+  "measurements": [
+    { "id": 1, "athleteId": 1, "metricId": 2, "sessionId": 1, "value": 6, "timestamp": "2025-10-24T17:40:00Z", "source": "manual" },
+    { "id": 2, "athleteId": 2, "metricId": 2, "sessionId": 1, "value": 7, "timestamp": "2025-10-24T17:41:00Z", "source": "manual" },
+    { "id": 3, "athleteId": 3, "metricId": 2, "sessionId": 1, "value": 5, "timestamp": "2025-10-24T17:42:00Z", "source": "manual" },
+
+    { "id": 4, "athleteId": 1, "metricId": 5, "sessionId": 1, "value": 12.40, "timestamp": "2025-10-24T16:50:00Z", "source": "timer" },
+    { "id": 5, "athleteId": 2, "metricId": 5, "sessionId": 1, "value": 11.98, "timestamp": "2025-10-24T16:52:00Z", "source": "timer" },
+    { "id": 6, "athleteId": 3, "metricId": 5, "sessionId": 1, "value": 12.75, "timestamp": "2025-10-24T16:55:00Z", "source": "timer" },
+
+    { "id": 7, "athleteId": 1, "metricId": 4, "sessionId": 1, "value": 9.8, "timestamp": "2025-10-24T17:00:00Z", "source": "gps" },
+    { "id": 8, "athleteId": 2, "metricId": 4, "sessionId": 1, "value": 10.2, "timestamp": "2025-10-24T17:00:00Z", "source": "gps" },
+    { "id": 9, "athleteId": 3, "metricId": 4, "sessionId": 1, "value": 9.4, "timestamp": "2025-10-24T17:00:00Z", "source": "gps" },
+
+    { "id": 10, "athleteId": 1, "metricId": 6, "sessionId": 1, "value": 38.2, "timestamp": "2025-10-24T17:10:00Z", "source": "forceplate" },
+    { "id": 11, "athleteId": 2, "metricId": 6, "sessionId": 1, "value": 41.0, "timestamp": "2025-10-24T17:12:00Z", "source": "forceplate" },
+    { "id": 12, "athleteId": 3, "metricId": 6, "sessionId": 1, "value": 36.5, "timestamp": "2025-10-24T17:14:00Z", "source": "forceplate" },
+
+    { "id": 13, "athleteId": 1, "metricId": 1, "value": 58.3, "timestamp": "2025-10-24T07:30:00Z", "source": "scale" },
+    { "id": 14, "athleteId": 2, "metricId": 1, "value": 70.2, "timestamp": "2025-10-24T07:35:00Z", "source": "scale" },
+    { "id": 15, "athleteId": 3, "metricId": 1, "value": 61.4, "timestamp": "2025-10-24T07:40:00Z", "source": "scale" }
+  ],
+
+  "devices": [
+    {
+      "id": 1,
+      "athleteId": 1,
+      "type": "watch",
+      "model": "Garmin Forerunner 945",
+      "serial": "GRM-945-ALC-001",
+      "pairedAt": "2025-09-01T12:00:00Z"
+    },
+    {
+      "id": 2,
+      "athleteId": 2,
+      "type": "hr_sensor",
+      "model": "Polar H10",
+      "serial": "POL-H10-BOB-042",
+      "pairedAt": "2025-09-05T09:15:00Z"
+    },
+    {
+      "id": 3,
+      "athleteId": 1,
+      "type": "forceplate",
+      "model": "Just Jump Mat",
+      "serial": "JJM-ACT-778",
+      "pairedAt": "2025-10-10T10:30:00Z"
+    }
+  ],
+
+  "deviceReadings": [
+    { "id": 1, "deviceId": 1, "athleteId": 1, "type": "hr_bpm", "sessionId": 1, "timestamp": "2025-10-24T16:35:00Z", "data": { "bpm": 92 } },
+    { "id": 2, "deviceId": 1, "athleteId": 1, "type": "hr_bpm", "sessionId": 1, "timestamp": "2025-10-24T16:45:00Z", "data": { "bpm": 138 } },
+    { "id": 3, "deviceId": 1, "athleteId": 1, "type": "hr_bpm", "sessionId": 1, "timestamp": "2025-10-24T17:05:00Z", "data": { "bpm": 164 } },
+    { "id": 4, "deviceId": 3, "athleteId": 1, "type": "jump", "sessionId": 1, "timestamp": "2025-10-24T17:10:00Z", "data": { "height_cm": 38.2, "contact_time_ms": 210 } }
+  ],
+
+  "injuries": [
+    {
+      "id": 1,
+      "athleteId": 2,
+      "type": "Hamstring strain",
+      "severity": "mild",
+      "onset": "2025-10-12",
+      "status": "rehab",
+      "notes": "Discomfort during late swing; tolerates submax acceleration."
+    }
+  ],
+
+  "rehabPlans": [
+    {
+      "id": 1,
+      "injuryId": 1,
+      "title": "Hamstring Return-to-Sprint",
+      "phases": [
+        { "name": "Isometrics", "duration_days": 4 },
+        { "name": "Eccentric Loading", "duration_days": 6 },
+        { "name": "Return to Speed", "duration_days": 7 }
+      ],
+      "checkpoints": [
+        { "day": 3, "metricId": 6, "target": ">= 35 cm" },
+        { "day": 10, "metricId": 4, "target": ">= 9.5 m/s (submax)" }
+      ]
+    }
+  ],
+
+  "events": [
+    {
+      "id": 1,
+      "type": "practice",
+      "title": "Speed Session A",
+      "teamId": 1,
+      "sessionId": 1,
+      "location": "Track A",
+      "start": "2025-10-24T16:30:00Z",
+      "end": "2025-10-24T17:45:00Z"
+    },
+    {
+      "id": 2,
+      "type": "strength",
+      "title": "Lower Body Strength",
+      "teamId": 1,
+      "sessionId": 2,
+      "location": "Performance Gym",
+      "start": "2025-10-26T10:00:00Z",
+      "end": "2025-10-26T11:15:00Z"
+    }
+  ],
+
+  "messages": [
+    {
+      "id": 1,
+      "threadId": 1,
+      "senderUserId": 1,
+      "receiverUserId": 3,
+      "body": "Great work today on your max velocity! Log your RPE when you get a chance.",
+      "sentAt": "2025-10-24T18:00:00Z"
+    },
+    {
+      "id": 2,
+      "threadId": 1,
+      "senderUserId": 3,
+      "receiverUserId": 1,
+      "body": "Thanks coach! RPE logged (6). Felt smooth.",
+      "sentAt": "2025-10-24T18:05:00Z"
+    }
+  ],
+
+  "notifications": [
+    { "id": 1, "userId": 3, "type": "reminder", "title": "Log RPE", "body": "Don't forget to log your RPE for Speed Session A.", "read": false, "createdAt": "2025-10-24T18:01:00Z" },
+    { "id": 2, "userId": 1, "type": "summary", "title": "Session Summary Ready", "body": "Speed Session A is complete. Review metrics.", "read": false, "createdAt": "2025-10-24T18:10:00Z" }
+  ],
+
+  "goals": [
+    {
+      "id": 1,
+      "athleteId": 1,
+      "title": "Break 12.0s in the 100m",
+      "targetMetricId": 5,
+      "targetValue": 11.80,
+      "dueDate": "2025-12-01",
+      "status": "in_progress",
+      "progress": 0.6
+    }
+  ],
+
+  "achievements": [
+    {
+      "id": 1,
+      "athleteId": 1,
+      "title": "100m PR",
+      "description": "Set a personal best of 12.10s",
+      "achievedAt": "2025-09-15"
+    }
+  ],
+
+  "appConfig": {
+    "units": "metric",
+    "timezone": "Europe/London",
+    "featureFlags": {
+      "showRPE": true,
+      "showHR": true,
+      "showGPS": true
+    }
+  }
+}
