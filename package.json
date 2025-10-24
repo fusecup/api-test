@@ -1,7 +1,6 @@
 {
 	"scripts": {
 		"api": "json-server --watch db.json --port 3000",
-		"api:enhanced": "node server.js",
 		"cf:dev": "wrangler dev",
 		"cf:deploy": "wrangler deploy"
 	},
