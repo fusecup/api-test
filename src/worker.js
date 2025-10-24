@@ -20,11 +20,34 @@ function toOpenApiType(value) {
 
 function buildOpenApi(state, origin) {
   const collections = Object.keys(state).filter((k) => Array.isArray(state[k]));
+  const keySet = new Set(collections);
   const schemas = {};
+  const paths = {};
+
+  const singular = (name) => {
+    if (name.endsWith("ies")) return name.slice(0, -3) + "y";
+    if (name.endsWith("s")) return name.slice(0, -1);
+    return name;
+  };
+  const toSchemaName = (col) => {
+    const s = singular(col);
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  };
+  const guessResource = (field) => {
+    const base = field.replace(/Ids?$/, "");
+    const sPlural = (base + "s").toLowerCase();
+    const esPlural = (base + "es").toLowerCase();
+    if (keySet.has(sPlural)) return sPlural;
+    if (keySet.has(esPlural)) return esPlural;
+    return sPlural;
+  };
 
   for (const col of collections) {
     const sample = (state[col] && state[col][0]) || {};
     const properties = {};
+    const toOne = [];
+    const toMany = [];
+
     for (const [k, v] of Object.entries(sample)) {
       if (Array.isArray(v)) {
         const first = v[0];
@@ -32,18 +55,27 @@ function buildOpenApi(state, origin) {
         else if (typeof first === "boolean") properties[k] = { type: "array", items: { type: "boolean" } };
         else if (typeof first === "object") properties[k] = { type: "array", items: { type: "object" } };
         else properties[k] = { type: "array", items: { type: "string" } };
+        if (/Ids$/.test(k)) {
+          const resource = guessResource(k);
+          toMany.push(resource);
+          properties[k].description = `Array of foreign keys to ${resource} (use ?_embed=${resource} on detail route)`;
+        }
       } else if (v && typeof v === "object") {
         properties[k] = { type: "object" };
       } else {
         properties[k] = toOpenApiType(v);
+        if (/Id$/.test(k)) {
+          const resource = guessResource(k);
+          toOne.push(resource);
+          properties[k].description = `Foreign key to ${resource} (use ?_expand=${singular(resource)} on detail route)`;
+        }
       }
     }
-    schemas[`${col.slice(0,1).toUpperCase()}${col.slice(1, -1)}`] = { type: "object", properties };
-  }
 
-  const paths = {};
-  for (const col of collections) {
-    const schemaName = `${col.slice(0,1).toUpperCase()}${col.slice(1, -1)}`;
+    const schemaName = toSchemaName(col);
+    schemas[schemaName] = { type: "object", properties };
+
+    // List path
     paths[`/${col}`] = {
       get: {
         summary: `List ${col}`,
@@ -60,13 +92,19 @@ function buildOpenApi(state, origin) {
         }
       }
     };
+
+    // Detail path
+    const allowedExpand = toOne.map((r) => singular(r));
+    const allowedEmbed = toMany;
+    const expandSchema = allowedExpand.length ? { type: "string", enum: allowedExpand } : { type: "string" };
+    const embedSchema = allowedEmbed.length ? { type: "string", enum: allowedEmbed } : { type: "string" };
     paths[`/${col}/{id}`] = {
       get: {
-        summary: `Get ${schemaName} by id` ,
+        summary: `Get ${schemaName} by id`,
         parameters: [
           { name: "id", in: "path", required: true, schema: { type: "integer" } },
-          { name: "_expand", in: "query", schema: { type: "string" }, description: "Expand to-one relations (repeatable)" },
-          { name: "_embed", in: "query", schema: { type: "string" }, description: "Embed to-many relations (repeatable)" }
+          { name: "_expand", in: "query", schema: expandSchema, description: "Expand to-one relations" },
+          { name: "_embed", in: "query", schema: embedSchema, description: "Embed to-many relations" }
         ],
         responses: {
           200: { description: "OK", content: { "application/json": { schema: { $ref: `#/components/schemas/${schemaName}` } } } },
