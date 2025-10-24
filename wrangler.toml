@@ -1,0 +1,7 @@
+name = "api-test"
+main = "src/worker.js"
+compatibility_date = "2024-10-01"
+
+[[rules]]
+globs = ["**/*.json"]
+type = "Text"
