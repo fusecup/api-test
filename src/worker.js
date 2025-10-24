@@ -117,6 +117,85 @@ function buildOpenApi(state, origin) {
   return { openapi: "3.0.3", info: { title: "Mock Sports Coaching API", version: "1.0.0" }, servers: [{ url: origin }], paths, components: { schemas } };
 }
 
+// Build a human-friendly HTML homepage that explains resources and how they connect
+function buildHome(state, origin) {
+  const collections = Object.keys(state).filter((k) => Array.isArray(state[k]));
+  const keySet = new Set(collections);
+  const singular = (name) => (name.endsWith("ies") ? name.slice(0, -3) + "y" : name.endsWith("s") ? name.slice(0, -1) : name);
+  const guessResource = (field) => {
+    const base = field.replace(/Ids?$/, "");
+    const sPlural = (base + "s").toLowerCase();
+    const esPlural = (base + "es").toLowerCase();
+    if (keySet.has(sPlural)) return sPlural;
+    if (keySet.has(esPlural)) return esPlural;
+    return sPlural;
+  };
+
+  const sections = collections.map((col) => {
+    const arr = state[col] || [];
+    const sample = arr[0] || {};
+    const toOne = [];
+    const toMany = [];
+    for (const [k, v] of Object.entries(sample)) {
+      if (/Id$/.test(k) && !Array.isArray(v) && typeof v !== "object") {
+        const res = guessResource(k);
+        if (keySet.has(res)) toOne.push(singular(res));
+      }
+      if (/Ids$/.test(k) && Array.isArray(v)) {
+        const res = guessResource(k);
+        if (keySet.has(res)) toMany.push(res);
+      }
+    }
+    const exList = `${origin}/${col}`;
+    const exDetail = `${origin}/${col}/1`;
+    const exDetailRel = `${exDetail}${toOne.length ? `?_expand=${toOne[0]}` : ""}${toMany.length ? `${toOne.length ? "&" : "?"}_embed=${toMany[0]}` : ""}`;
+    return `
+      <section>
+        <h2>/${col} <small>(${arr.length} items)</small></h2>
+        <p><strong>To-one:</strong> ${toOne.length ? toOne.join(", ") : "—"}<br/>
+           <strong>To-many:</strong> ${toMany.length ? toMany.join(", ") : "—"}</p>
+        <p><strong>Examples:</strong><br/>
+           <code>GET ${exList}</code><br/>
+           <code>GET ${exDetail}</code><br/>
+           <code>GET ${exDetailRel}</code>
+        </p>
+      </section>`;
+  }).join("\n");
+
+  const html = `<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mock Sports Coaching API</title>
+    <style>
+      body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 2rem; line-height: 1.5; }
+      header { margin-bottom: 1.5rem; }
+      h1 { margin: 0 0 .25rem 0; font-size: 1.75rem; }
+      a { color: #2563eb; text-decoration: none; }
+      code { background: #f3f4f6; padding: .15rem .35rem; border-radius: 4px; }
+      section { border-top: 1px solid #e5e7eb; padding-top: 1rem; margin-top: 1rem; }
+      small { color: #6b7280; font-weight: normal; }
+      .links { margin-top: .5rem; }
+      .links a { margin-right: 1rem; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Mock Sports Coaching API</h1>
+      <div class="links">
+        <a href="${origin}/docs">Swagger Docs</a>
+        <a href="${origin}/openapi.json">OpenAPI JSON</a>
+      </div>
+      <p>This is a mock API for a mobile coaching app. Relationships use <code>*Id</code> (to-one) and <code>*Ids</code> (to-many). Use <code>_expand</code> to include to-one relations on detail routes and <code>_embed</code> to include to-many collections.</p>
+      <p><strong>Examples:</strong> <code>/sessions/1?_expand=team&_expand=coach&_expand=workout&_embed=measurements&_embed=deviceReadings</code></p>
+    </header>
+    ${sections}
+  </body>
+</html>`;
+  return html;
+}
+
 function cors() {
   return {
     "access-control-allow-origin": "*",
@@ -269,11 +348,8 @@ export default {
     }
 
     if (url.pathname === "/" || url.pathname === "") {
-      return json({
-        name: "Mock Sports Coaching API",
-        docs: new URL("/docs", url).toString(),
-        collections: Object.keys(db).filter((k) => Array.isArray(db[k]))
-      });
+      const html = buildHome(db, url.origin);
+      return new Response(html, { status: 200, headers: { "content-type": "text/html; charset=utf-8", ...cors() } });
     }
 
     if (url.pathname === "/openapi.json") {
