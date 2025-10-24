@@ -1,8 +1,13 @@
 {
 	"scripts": {
-		"api": "json-server --watch db.json --port 3000"
+		"api": "json-server --watch db.json --port 3000",
+		"cf:dev": "wrangler dev",
+		"cf:deploy": "wrangler deploy"
 	},
 	"dependencies": {
 		"json-server": "1.0.0-beta.3"
+	},
+	"devDependencies": {
+		"wrangler": "^3.80.0"
 	}
 }
